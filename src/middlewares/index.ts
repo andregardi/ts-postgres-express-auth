@@ -1,6 +1,7 @@
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import bodyParser from 'body-parser';
 import { Request, Response, NextFunction } from 'express';
 
 // CORS Configuration
@@ -21,4 +22,8 @@ export const applyMiddlewares = (app: any) => {
   app.use(cors(corsOptions));
   app.use(helmet()); // Adds various HTTP headers for security
   app.use(limiter); // Apply rate limiting
+
+  // Body parsing middleware
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
 };
