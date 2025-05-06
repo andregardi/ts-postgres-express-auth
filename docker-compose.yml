@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: myapp-postgres
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: myapp-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+    driver: local
+  pgadmin-data:
+    driver: local

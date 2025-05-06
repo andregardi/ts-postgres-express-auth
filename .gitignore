@@ -10,6 +10,7 @@ dist/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
 
 # Logs
 logs
@@ -52,3 +53,7 @@ yarn-error.log*
 
 # Misc
 .cache/
+
+# Docker
+.docker
+docker-compose.override.yml
