@@ -60,3 +60,32 @@ DB_USERNAME=postgres
 DB_PASSWORD=postgres
 DB_NAME=myapp
 ```
+
+### Database Scripts
+
+#### Create Database Migrations
+```bash
+npm run db:generate
+```
+Generate Drizzle ORM migrations based on your schema changes.
+
+#### Apply Database Migrations
+```bash
+npm run db:migrate
+```
+Apply pending database migrations to update your database schema.
+
+### Setting Up .env File
+1. Copy the example environment file:
+```bash
+cp .env.example .env
+```
+
+2. Open `.env` and fill in the following details:
+- `DB_HOST`: Database host (usually `localhost` for local development)
+- `DB_PORT`: Database port (default is `5432`)
+- `DB_USERNAME`: Database username
+- `DB_PASSWORD`: Database password
+- `DB_NAME`: Name of your database
+
+**Important:** Never commit your `.env` file to version control. It is already included in `.gitignore`.

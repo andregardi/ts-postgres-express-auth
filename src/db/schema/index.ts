@@ -1,0 +1,1 @@
+export { itemsTable } from "./items";
