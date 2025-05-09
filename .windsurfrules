@@ -1,0 +1,56 @@
+Every time you choose to apply a rule(s), explicitly state the rule(s) in the output. You can abbreviate the rule description to a single word or phrase.
+
+### 1. Database (Drizzle)
+
+-   Always use Drizzle ORM for database operations.
+-   When creating tables:
+    -   Create new schema files in `src/db/schema`.
+    -   Ensure new schema files are correctly exported and included in `src/db/schema/index.ts`.
+-   Use the following commands for migrations (as per [package.json](cci:7://file:///Users/andregardi/projects/list/server/package.json:0:0-0:0)):
+    -   `npm run db:generate` - Create new migration file (equivalent to `drizzle-kit generate`).
+    -   `npm run db:push` - Push migrations to the database (equivalent to `drizzle-kit push`).
+
+### 2. File Naming
+
+-   Use **kebab-case** for all folder and file names (e.g., `user-controller.ts`, `auth-routes`).
+-   Never use uppercase letters in file or folder names.
+-   Use **camelCase** for variables and function names in code (e.g., `getUserById`, `const itemCount`).
+
+### 3. Routing
+
+-   All route definitions must reside in the `src/routes` directory.
+-   Route files should be named simply and reflect the resource they manage (e.g., `items.ts` for item-related routes, not `items-route.ts`).
+-   For routes requiring authentication:
+    -   Apply the `requireAuth` middleware located in `src/middlewares/auth.ts`.
+
+### 4. Logic Separation
+
+-   Keep route handler files (`src/routes/*`) lean and focused on request/response handling.
+-   Delegate complex business logic to controller files located in `src/controllers`.
+-   Controller files should be named simply, corresponding to the resource or feature area (e.g., `items.ts` for item-related logic, not `items-controller.ts`).
+
+### 5. Services
+
+-   Service files are to be placed in `src/services`.
+-   Services should encapsulate logic for interacting with **external APIs only**.
+-   Create new service files as needed.
+-   Service files should have simple names reflecting the external service they interact with (e.g., `payment-service.ts`, `notification-service.ts`).
+
+### 6. Code Style & Quality
+
+-   Prioritize clear, readable, and maintainable code over overly concise or "clever" one-liners.
+-   Add comments to explain complex logic, non-obvious decisions, or workarounds.
+-   Follow established patterns and conventions within the existing codebase.
+-   Adhere to the **DRY (Don't Repeat Yourself)** principle in all code and text. Review files with this in mind.
+-   **Certainty**: Verify information and cross-check sources before making definitive statements or implementing critical logic. Leverage the ability to inspect the entire repository.
+
+---
+
+### 7. Project Setup & Configuration
+- Maintain a `.env.example` file in the root directory, listing all required environment variables with placeholder or example values. **Never commit the actual `.env` file.**
+- **TypeScript Best Practices**:
+    - Strive to use specific types instead of `any` whenever possible to leverage TypeScript's static typing benefits.
+    - Utilize TypeScript features like interfaces, enums, and utility types to create robust and self-documenting code.
+
+
+
