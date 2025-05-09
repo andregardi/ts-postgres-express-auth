@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
 import { Request, Response, NextFunction } from 'express';
+import { initializeAuth } from './auth';
 
 // CORS Configuration
 export const corsOptions = {
@@ -26,4 +27,7 @@ export const applyMiddlewares = (app: any) => {
   // Body parsing middleware
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  
+  // Initialize Passport authentication
+  app.use(initializeAuth());
 };
