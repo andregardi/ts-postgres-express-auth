@@ -10,8 +10,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@core/*": ["core/*"]
+      "@core/*": ["core/*"],
+      "@src/*": ["src/*"]
     },
     "typeRoots": ["./node_modules/@types", "./src/types"],
   },
