@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { db } from '../../core/db/connection';
+import { db } from '@core/db';
 import { itemsTable } from '../../schema';
 import { eq } from 'drizzle-orm';
 import { validateItemBody, validateItemId } from './validations';

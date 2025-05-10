@@ -53,4 +53,7 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
     - Utilize TypeScript features like interfaces, enums, and utility types to create robust and self-documenting code.
 
 
+### Other
+Do never edit files on node_modules
+
 

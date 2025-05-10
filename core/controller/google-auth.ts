@@ -1,8 +1,8 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
 import { authController } from "./auth";
-import { db } from "../db";
-import { usersTable } from "../db/schema/users";
+import { db } from "@core/db";
+import { usersTable } from "@core/db/schema/users";
 import { eq } from "drizzle-orm";
 import { Request, Response } from "express";
 
