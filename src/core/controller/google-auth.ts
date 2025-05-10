@@ -1,8 +1,8 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
 import { authController } from "./auth";
-import { db } from "../../db";
-import { usersTable } from "../../db/schema/users";
+import { db } from "../db";
+import { usersTable } from "../db/schema/users";
 import { eq } from "drizzle-orm";
 import { Request, Response } from "express";
 
@@ -38,7 +38,7 @@ const updateUserGoogleId = async (id: number, googleId: string) => {
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID!,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-  callbackURL: '/api/auth/google/callback',
+  callbackURL: '/auth/google/callback',
 },
   async function (accessToken, refreshToken, profile, done) {
     try {

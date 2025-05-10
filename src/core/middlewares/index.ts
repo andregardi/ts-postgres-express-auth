@@ -2,7 +2,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
-import { Request, Response, NextFunction } from 'express';
 import { initializeAuth } from './auth';
 
 // CORS Configuration

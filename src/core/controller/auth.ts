@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt, { SignOptions } from 'jsonwebtoken';
-import { db } from '../../db';
-import { usersTable } from '../../db/schema';
+import { db } from '../db';
+import { usersTable } from '../db/schema';
 import { eq } from 'drizzle-orm';
 
 // Load environment variables

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { googleAuthController } from '../../controller/auth/google-auth';
+import { googleAuthController } from '../controller/google-auth';
 import passport from 'passport';
 
 export const googleRouter = Router();

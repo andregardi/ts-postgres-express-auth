@@ -1,12 +1,10 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import { db } from '../../db/connection';
-import { itemsTable } from '../../db/schema';
+import { Router } from 'express';
+import { db } from '../../core/db/connection';
+import { itemsTable } from '../../schema';
 import { eq } from 'drizzle-orm';
 import { validateItemBody, validateItemId } from './validations';
 
 const itemsRouter = Router();
-
-itemsRouter.use('/:id', validateItemId);
 
 // Get all items
 itemsRouter.get('/', async (req, res) => {
@@ -18,6 +16,8 @@ itemsRouter.get('/', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+itemsRouter.use('/:id', validateItemId);
 
 // Get item by ID
 itemsRouter.get('/:id', async (req, res) => {

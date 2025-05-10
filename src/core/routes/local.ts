@@ -1,6 +1,6 @@
 import { Router, Response, NextFunction, Request } from 'express';
-import { authController } from '../../controller/auth/auth';
-import { requireAuth } from '../../middlewares/auth';
+import { authController } from '../controller/auth';
+import { requireAuth } from '../middlewares/auth';
 
 const validateInput = (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;

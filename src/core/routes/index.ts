@@ -2,9 +2,7 @@ import { Router } from 'express';
 import { googleRouter } from './google';
 import { localRouter } from './local';
 
-const router = Router();
+export const authRouter = Router();
 
-router.use(localRouter);
-router.use('/google', googleRouter);
-
-export default router;
+authRouter.use(localRouter);
+authRouter.use('/google', googleRouter);
