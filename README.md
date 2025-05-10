@@ -89,3 +89,19 @@ cp .env.example .env
 - `DB_NAME`: Name of your database
 
 **Important:** Never commit your `.env` file to version control. It is already included in `.gitignore`.
+
+### Google Authentication Setup
+
+To set up Google authentication, follow these steps:
+
+1. Register your app on the [Google Cloud Platform console](https://console.cloud.google.com/) and select or create a project.
+2. Navigate to the [APIs & Services page](https://console.cloud.google.com/apis) and select [Credentials](https://console.cloud.google.com/apis/credentials).
+3. Add `http://localhost:3000` as an authorized origin URI.
+4. Add `http://localhost:3000/api/auth/google/callback` to the authorized redirect URIs.
+5. Update your `.env` file with the following values:
+   - `GOOGLE_CLIENT_ID`: Copy the client ID from the credentials page.
+   - `GOOGLE_CLIENT_SECRET`: Copy the client secret from the credentials page.
+   - `GOOGLE_CALLBACK_URL`: Set to `http://localhost:3000/api/auth/google/callback`.
+
+After setting up Google authentication, you can access the API at:
+http://localhost:3000/api/auth/google/login
