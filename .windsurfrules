@@ -12,11 +12,19 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
 - When using Drizzle, always use the `db` instance from `@core/db`.
 - When using Drizzle, use select() instead of findMany() or findFirst().
 - When using pgTable to create a new schema variables, name the const something like "itemsTable" instead of "items".
+- When setting relations, check the examples on https://orm.drizzle.team/docs/relations
+- When creating schemas with relationships:
+  1. Start with all related schemas in a single file first
+  2. If separating schemas into multiple files, break them down one at a time:
+     - First create the "parent" or main entity file
+     - Then extract dependent entities one by one
+     - Update imports in both files with each extraction
+  3. Handle circular references properly:
+     - Ensure relations are defined after all table structures
 
 ### 2. File Naming
 
 -   Use **kebab-case** for all folder and file names (e.g., `user-controller.ts`, `auth-routes`).
--   Never use uppercase letters in file or folder names.
 -   Use **camelCase** for variables and function names in code (e.g., `getUserById`, `const itemCount`).
 
 ### 3. Routing
@@ -25,7 +33,7 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
 -   Route files should be named simply and reflect the resource they manage (e.g., `items.ts` for item-related routes, not `items-route.ts`).
 - If creating new routers on new files, ensure they are imported and added to `src/routes/index.ts`.
 - Validate user input, both body and query parameters.
--   For routes requiring authentication:
+- For routes requiring authentication:
     -   Apply the `requireAuth` middleware located in `src/middlewares/auth.ts`.
 
 ### 4. Logic Separation
@@ -48,22 +56,42 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
 -   Follow established patterns and conventions within the existing codebase.
 -   Adhere to the **DRY (Don't Repeat Yourself)** principle in all code and text. Review files with this in mind.
 -   **Certainty**: Verify information and cross-check sources before making definitive statements or implementing critical logic. Leverage the ability to inspect the entire repository.
-
----
+- Do not use package/libs that are not installed on package.json. If really necessary suggest the user to install it, before implementing it.
 
 ### 7. Project Setup & Configuration
 - Maintain a `.env.example` file in the root directory, listing all required environment variables with placeholder or example values. **Never commit the actual `.env` file.**
 - **TypeScript Best Practices**:
     - Strive to use specific types instead of `any` whenever possible to leverage TypeScript's static typing benefits.
     - Utilize TypeScript features like interfaces, enums, and utility types to create robust and self-documenting code.
-- We use ESLint with Prettier for code quality and formatting. Try to keep up with .prettierrc
 
-### 8. core and src folders
-- ./core folder is for database/drizzle configuration, middlewares and authentication.
-    - ./core/db.ts is for database connection and drizzle configuration.
-    - ./core/middlewares/auth.ts is for authentication middleware.
-- ./src folder is for project specific business logic, including controllers, routes and models.
-- Do not mix those folders. If creating new schema on src, do not add controller or routes on core.
+### 8. Folder Structure
+- Project has two main folders with distinct purposes:
+
+1. ./core folder
+   - Contains ONLY framework-level configurations and core infrastructure
+   - Includes:
+     - Database connection setup (core/db.ts)
+     - Authentication core logic (core/auth.ts)
+   - Do NOT put here:
+     - Business logic
+     - Middlewares
+     - Routes
+     - Models/Schemas
+
+2. ./src folder
+   - Contains ALL business logic and application code
+   - Organized into:
+     - /controllers - Business logic
+     - /routes - API endpoints
+     - /middlewares - Request processing (including auth middleware)
+     - /schema - Database models and relations
+     - /services - External API integrations
+     - /types - TypeScript type definitions
+
+- Keep strict separation:
+  - If it's specific to your application → put it in /src
+  - If it's framework/infrastructure → put it in /core
+  - When in doubt, prefer /src
 
 
 ### Other
@@ -71,5 +99,3 @@ Never edit files on node_modules
 When documenting the API, remember to use the full path, including /api and /auth for the paths.
 -Example 1, the login route is /auth/login because "/auth" was prefixed on core/app.ts
 -Example 2, all files in /src/routes are prefixed with "/api" defined on src/routes/index.ts
-
-
