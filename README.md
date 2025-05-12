@@ -101,7 +101,7 @@ To set up Google authentication, follow these steps:
 5. Update your `.env` file with the following values:
    - `GOOGLE_CLIENT_ID`: Copy the client ID from the credentials page.
    - `GOOGLE_CLIENT_SECRET`: Copy the client secret from the credentials page.
-   - `GOOGLE_CALLBACK_URL`: Set to `http://localhost:3000/auth/google/callback`.
+   - `GOOGLE_CALLBACK_URL`: Set to `http://localhost:3001/auth/google/callback`.
 
 After setting up Google authentication, you can access the API at:
-http://localhost:3000/auth/google/login
+http://localhost:3001/auth/google/login

@@ -21,6 +21,7 @@ Use **kebab-case** for all folder and file names (e.g., `user-controller.ts`, `a
 - If creating new routers on new files, ensure they are imported and added to `src/routes/api/index.ts` if it is an API route. Ensure they are imported and added to `src/routes/auth/index.ts` if it is an authentication route.
 - Validate user input, both body and query parameters.
 - For routes requiring authentication: Apply the `requireAuth` middleware located in `src/middlewares/auth.ts`.
+- Remember to update the openapi.yaml file with the new routes, at docs/openapi.yaml.
 
 ### 4. Logic Separation
 
