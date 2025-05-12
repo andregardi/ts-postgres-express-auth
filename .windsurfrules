@@ -65,8 +65,27 @@ src/
     ├── api/         # API endpoints
     └── auth/        # Authentication routes
 """
+
+### 9. Request Validation
+- Use Zod schemas for request validation
+- Import and use the [validateBody](cci:1://file:///Users/andregardi/projects/list/server/src/middlewares/body-validator.ts:3:0-36:1) middleware to validate request bodies
+- Validation schema example:
+```typescript
+// In validations.ts
+const createItemSchema = z.object({
+  name: z.string().min(1),
+  price: z.number().positive(),
+  description: z.string().optional()
+})
+
+// In router.ts
+router.post('/items', validateBody(createItemSchema), handler)
+```
+
 ### Other
 Never edit files on node_modules
 When documenting the API, remember to use the full path, including /api and /auth for the paths.
 -Example 1, the login route is /auth/login because "/auth" was prefixed on all routes on 'src/routes/auth'
 -Example 2, the items route is /api/items because "/api" was prefixed on all routes on 'src/routes/api'
+When handling express routes and middlwares, remember that it returns void.
+  -Avoid "return res.send()" or "return res.json()" or "return res.status()"

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { itemsRouter } from './items/router'
+import { itemsRouter } from './items'
 
 export const apiRoutes = Router()
 
