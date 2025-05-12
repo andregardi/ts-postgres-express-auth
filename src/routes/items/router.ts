@@ -37,7 +37,8 @@ itemsRouter.get('/:id', async (req, res) => {
     const item = await itemsController.getItemById(itemId)
 
     if (!item) {
-      return res.status(404).json({ error: 'Item not found' })
+      res.status(404).json({ error: 'Item not found' })
+      return
     }
 
     res.json(item)
@@ -56,7 +57,8 @@ itemsRouter.put('/:id', validateItemBody, async (req, res) => {
     const item = await itemsController.updateItem(itemId, title)
 
     if (!item) {
-      return res.status(404).json({ error: 'Item not found' })
+      res.status(404).json({ error: 'Item not found' })
+      return
     }
 
     res.json(item)
@@ -73,7 +75,8 @@ itemsRouter.delete('/:id', async (req, res) => {
     const item = await itemsController.deleteItem(itemId)
 
     if (!item) {
-      return res.status(404).json({ error: 'Item not found' })
+      res.status(404).json({ error: 'Item not found' })
+      return
     }
 
     res.json(item)

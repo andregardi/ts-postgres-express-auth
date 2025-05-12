@@ -7,11 +7,13 @@ const validateInput = (req: Request, res: Response, next: NextFunction) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
   if (!email || !password) {
-    return res.status(400).json({ error: 'Email and password are required' })
+    res.status(400).json({ error: 'Email and password are required' })
+    return
   }
 
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: 'Email must be a valid email address' })
+    res.status(400).json({ error: 'Email must be a valid email address' })
+    return
   }
 
   next()
@@ -49,12 +51,13 @@ localRouter.post('/login', validateInput, async (req, res) => {
   }
 })
 
-localRouter.get('/me', requireAuth, (req: Request, res: Response) => {
+localRouter.get('/me', requireAuth, async (req: Request, res: Response) => {
   // The user is attached to the request by Passport
   const user = req.user
 
   if (!user) {
-    return res.status(401).json({ message: 'Unauthorized' })
+    res.status(401).json({ message: 'Unauthorized' })
+    return
   }
 
   res.status(200).json({

@@ -75,7 +75,8 @@ export const googleAuthController = {
 
   callback(req: Request, res: Response) {
     if (!req.user) {
-      return res.status(401).json({ error: 'User not authenticated' })
+      res.status(401).json({ error: 'User not authenticated' })
+      return
     }
 
     const user = req.user
