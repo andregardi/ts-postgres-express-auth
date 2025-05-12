@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { itemsController } from '../../controllers/items'
+import { itemsController } from '../../../controllers/items'
 import { validateItemBody, validateItemId } from './validations'
 
 const itemsRouter = Router()

@@ -1,6 +1,8 @@
 import { Router } from 'express'
-import { itemsRouter } from './items/router'
+import { apiRoutes } from './api'
+import { authRouter } from './auth'
 
-export const apiRoutes = Router()
+export const mainRouter = Router()
 
-apiRoutes.use('/items', itemsRouter)
+mainRouter.use('/api', apiRoutes)
+mainRouter.use('/auth', authRouter)
