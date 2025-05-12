@@ -2,11 +2,11 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 import express, { Request, Response } from 'express'
-import { authRouter } from './routes'
-import { applyMiddlewares } from './middlewares'
+import { authRouter } from './routes/auth'
+import { applyMiddlewares } from './middlewares/common'
 
 export const coreApp = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 // Apply middlewares
 applyMiddlewares(coreApp)

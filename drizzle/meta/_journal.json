@@ -15,6 +15,13 @@
       "when": 1746811031379,
       "tag": "0001_colossal_william_stryker",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1747063156988,
+      "tag": "0002_dapper_sally_floyd",
+      "breakpoints": true
     }
   ]
 }

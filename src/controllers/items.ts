@@ -1,6 +1,6 @@
 // Controller for item-related business logic
-import { db } from '@core/db'
-import { itemsTable } from '../schema'
+import { db } from '../db'
+import { itemsTable } from '../db/schema'
 import { eq } from 'drizzle-orm'
 
 export const itemsController = {

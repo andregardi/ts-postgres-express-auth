@@ -9,10 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {
-      "@core/*": ["core/*"],
-      "@src/*": ["src/*"]
-    },
     "typeRoots": ["./node_modules/@types", "./src/types"],
   },
   "include": ["src/**/*", "core/**/*", "drizzle.config.ts", "eslint.config.mjs"],

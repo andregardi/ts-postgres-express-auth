@@ -8,3 +8,8 @@ export const usersTable = pgTable('users', {
   displayName: text('display_name'),
   createdAt: timestamp('created_at').defaultNow(),
 })
+
+export const itemsTable = pgTable('items', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+})

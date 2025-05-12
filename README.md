@@ -96,8 +96,8 @@ To set up Google authentication, follow these steps:
 
 1. Register your app on the [Google Cloud Platform console](https://console.cloud.google.com/) and select or create a project.
 2. Navigate to the [APIs & Services page](https://console.cloud.google.com/apis) and select [Credentials](https://console.cloud.google.com/apis/credentials).
-3. Add `http://localhost:3000` as an authorized origin URI.
-4. Add `http://localhost:3000/api/auth/google/callback` to the authorized redirect URIs.
+3. Add `http://localhost:3001` as an authorized origin URI.
+4. Add `http://localhost:3001/api/auth/google/callback` to the authorized redirect URIs.
 5. Update your `.env` file with the following values:
    - `GOOGLE_CLIENT_ID`: Copy the client ID from the credentials page.
    - `GOOGLE_CLIENT_SECRET`: Copy the client secret from the credentials page.

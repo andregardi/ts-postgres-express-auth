@@ -1,1 +1,0 @@
-export { usersTable } from './users'
