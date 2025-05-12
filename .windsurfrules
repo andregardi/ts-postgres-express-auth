@@ -4,11 +4,14 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
 
 -   Always use Drizzle ORM for database operations.
 -   When creating tables:
-    -   Create new schema files in `src/db/schema`.
-    -   Ensure new schema files are correctly exported and included in `src/db/schema/index.ts`.
+    -   Create new schema files in `src/schema`.
+    -   Ensure new schema files are correctly exported and included in `src/schema/index.ts`.
 -   Use the following commands for migrations (as per [package.json](cci:7://file:///Users/andregardi/projects/list/server/package.json:0:0-0:0)):
     -   `npm run db:generate` - Create new migration file (equivalent to `drizzle-kit generate`).
     -   `npm run db:push` - Push migrations to the database (equivalent to `drizzle-kit push`).
+- When using Drizzle, always use the `db` instance from `@core/db`.
+- When using Drizzle, use select() instead of findMany() or findFirst().
+- When using pgTable to create a new schema variables, name the const something like "itemsTable" instead of "items".
 
 ### 2. File Naming
 
@@ -20,6 +23,8 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
 
 -   All route definitions must reside in the `src/routes` directory.
 -   Route files should be named simply and reflect the resource they manage (e.g., `items.ts` for item-related routes, not `items-route.ts`).
+- If creating new routers on new files, ensure they are imported and added to `src/routes/index.ts`.
+- Validate user input, both body and query parameters.
 -   For routes requiring authentication:
     -   Apply the `requireAuth` middleware located in `src/middlewares/auth.ts`.
 
@@ -51,9 +56,20 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
 - **TypeScript Best Practices**:
     - Strive to use specific types instead of `any` whenever possible to leverage TypeScript's static typing benefits.
     - Utilize TypeScript features like interfaces, enums, and utility types to create robust and self-documenting code.
+- We use ESLint with Prettier for code quality and formatting. Try to keep up with .prettierrc
+
+### 8. core and src folders
+- ./core folder is for database/drizzle configuration, middlewares and authentication.
+    - ./core/db.ts is for database connection and drizzle configuration.
+    - ./core/middlewares/auth.ts is for authentication middleware.
+- ./src folder is for project specific business logic, including controllers, routes and models.
+- Do not mix those folders. If creating new schema on src, do not add controller or routes on core.
 
 
 ### Other
-Do never edit files on node_modules
+Never edit files on node_modules
+When documenting the API, remember to use the full path, including /api and /auth for the paths.
+-Example 1, the login route is /auth/login because "/auth" was prefixed on core/app.ts
+-Example 2, all files in /src/routes are prefixed with "/api" defined on src/routes/index.ts
 
 

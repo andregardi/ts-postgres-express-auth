@@ -20,7 +20,7 @@ if (missingVariables.length > 0) {
 
 export default defineConfig({
   out: './drizzle', // Specifies the output directory for migrations
-  schema: './src/db/schema/index.ts', // Points to your main schema file
+  schema: './src/schema/index.ts', // Points to your main schema file
   dialect: 'postgresql',
   dbCredentials: {
     host: DB_HOST!,
