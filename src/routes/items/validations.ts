@@ -1,22 +1,21 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express'
 
 export const validateItemId = (req: Request, res: Response, next: NextFunction) => {
-    const itemId = parseInt(req.params.id);
-    
-    if (isNaN(itemId)) {
-        return res.status(400).json({ error: 'Invalid item ID' });
-    }
+  const itemId = parseInt(req.params.id)
 
-    next();
-};
+  if (isNaN(itemId)) {
+    return res.status(400).json({ error: 'Invalid item ID' })
+  }
 
+  next()
+}
 
 export const validateItemBody = (req: Request, res: Response, next: NextFunction) => {
-    const { title } = req.body;
-    
-    if (typeof title !== 'string' || title.trim() === '') {
-        return res.status(400).json({ error: 'Title must be a non-empty string' });
-    }
+  const { title } = req.body
 
-    next();
-};
+  if (typeof title !== 'string' || title.trim() === '') {
+    return res.status(400).json({ error: 'Title must be a non-empty string' })
+  }
+
+  next()
+}

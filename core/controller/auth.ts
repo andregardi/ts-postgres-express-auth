@@ -1,10 +1,17 @@
-import bcrypt from 'bcrypt';
-import jwt, { SignOptions } from 'jsonwebtoken';
-import { db } from '../db';
-import { usersTable } from '../db/schema';
-import { eq } from 'drizzle-orm';
+import bcrypt from 'bcrypt'
+import jwt, { SignOptions } from 'jsonwebtoken'
+import { db } from '../db'
+import { usersTable } from '../db/schema'
+import { eq } from 'drizzle-orm'
 
-// Load environment variables
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: {
+      id: number
+      email: string
+    }
+  }
+}
 
 export const authController = {
   SALT_ROUNDS: 10,
@@ -12,18 +19,14 @@ export const authController = {
 
   async registerUser(email: string, password: string) {
     // Check if user already exists
-    const existingUsers = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.email, email))
-      .limit(1);
+    const existingUsers = await db.select().from(usersTable).where(eq(usersTable.email, email)).limit(1)
 
     if (existingUsers.length > 0) {
-      throw new Error('User with this email already exists');
+      throw new Error('User with this email already exists')
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, this.SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(password, this.SALT_ROUNDS)
 
     // Create the user
     const [newUser] = await db
@@ -32,10 +35,10 @@ export const authController = {
         email,
         password: hashedPassword,
       })
-      .returning();
+      .returning()
 
     // Generate JWT token
-    const token = this.generateToken(newUser);
+    const token = this.generateToken(newUser)
 
     return {
       token,
@@ -43,7 +46,7 @@ export const authController = {
         id: newUser.id,
         email: newUser.email,
       },
-    };
+    }
   },
 
   /**
@@ -51,29 +54,25 @@ export const authController = {
    */
   async loginUser(email: string, password: string) {
     // Find user by email
-    const users = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.email, email))
-      .limit(1);
+    const users = await db.select().from(usersTable).where(eq(usersTable.email, email)).limit(1)
 
     if (users.length === 0) {
-      throw new Error('Invalid email or password');
+      throw new Error('Invalid email or password')
     }
 
-    const user = users[0];
+    const user = users[0]
 
     // Verify password
-    const isPasswordValid = await bcrypt.compare(password, user.password || '');
+    const isPasswordValid = await bcrypt.compare(password, user.password || '')
     if (!isPasswordValid) {
-      throw new Error('Invalid email or password');
+      throw new Error('Invalid email or password')
     }
 
     // Generate JWT token
     const token = this.generateToken({
       id: user.id,
       email: user.email,
-    });
+    })
 
     return {
       token,
@@ -81,7 +80,7 @@ export const authController = {
         id: user.id,
         email: user.email,
       },
-    };
+    }
   },
 
   /**
@@ -91,11 +90,11 @@ export const authController = {
     const payload = {
       id: user.id,
       email: user.email,
-    };
+    }
     const options: SignOptions = {
       expiresIn: '7d',
-    };
+    }
 
-    return jwt.sign(payload, this.JWT_SECRET, options);
-  }
+    return jwt.sign(payload, this.JWT_SECRET, options)
+  },
 }

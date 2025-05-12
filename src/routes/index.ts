@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import { itemsRouter } from './items/router';
+import { Router } from 'express'
+import { itemsRouter } from './items/router'
 
-export const apiRoutes = Router();
+export const apiRoutes = Router()
 
-apiRoutes.use('/items', itemsRouter);
+apiRoutes.use('/items', itemsRouter)

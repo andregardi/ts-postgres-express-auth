@@ -1,4 +1,4 @@
-import { coreApp } from "@core/app";
-import { apiRoutes } from "./routes";
+import { coreApp } from '@core/app'
+import { apiRoutes } from './routes'
 
-coreApp.use('/api', apiRoutes);
+coreApp.use('/api', apiRoutes)

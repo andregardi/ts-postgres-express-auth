@@ -1,17 +1,17 @@
-import passport from 'passport';
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { db } from '../db';
-import { usersTable } from '../db/schema';
-import { eq } from 'drizzle-orm';
+import passport from 'passport'
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
+import { db } from '../db'
+import { usersTable } from '../db/schema'
+import { eq } from 'drizzle-orm'
 
 // Load environment variables
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET
 
 // Configure JWT options
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: JWT_SECRET!,
-};
+}
 
 // Configure Passport JWT strategy
 passport.use(
@@ -21,27 +21,27 @@ passport.use(
       const users = await db
         .select({
           id: usersTable.id,
-          createdAt: usersTable.createdAt
+          createdAt: usersTable.createdAt,
         })
         .from(usersTable)
         .where(eq(usersTable.id, payload.id))
-        .limit(1);
+        .limit(1)
 
       if (users.length === 0) {
-        return done(null, false);
+        return done(null, false)
       }
 
-      return done(null, users[0]);
+      return done(null, users[0])
     } catch (error) {
-      return done(error, false);
+      return done(error, false)
     }
-  })
-);
+  }),
+)
 
 // Authentication middleware
-export const requireAuth = passport.authenticate('jwt', { session: false });
+export const requireAuth = passport.authenticate('jwt', { session: false })
 
 // Initialize Passport
 export const initializeAuth = () => {
-  return passport.initialize();
-};
+  return passport.initialize()
+}
