@@ -5,7 +5,7 @@ Every time you choose to apply a rule(s), explicitly state the rule(s) in the ou
 -   Always use Drizzle ORM for database operations.
 -   When creating tables, use 'src/db/schema.ts'
 -   Ensure new schema files are correctly exported and included in `src/db/schema.ts`.
--   Use the following commands for migrations (as per [package.json](cci:7://file:///Users/andregardi/projects/list/server/package.json:0:0-0:0)):
+-   Use the following commands for migrations:
     -   `npm run db:generate` - Create new migration file (equivalent to `drizzle-kit generate`).
     -   `npm run db:push` - Push migrations to the database (equivalent to `drizzle-kit push`).
 - When using Drizzle, use select() instead of findMany() or findFirst().
@@ -69,7 +69,7 @@ src/
 
 ### 9. Request Validation
 - Use Zod schemas for request validation
-- Import and use the [validateBody](cci:1://file:///Users/andregardi/projects/list/server/src/middlewares/body-validator.ts:3:0-36:1) middleware to validate request bodies
+- Import and use the validateBody middleware to validate request bodies
 - Validation schema example:
 ```typescript
 // In validations.ts

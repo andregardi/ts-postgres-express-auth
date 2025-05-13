@@ -10,7 +10,7 @@ export default defineConfig([
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ['src/**/*.{js,mjs,cjs,ts}', 'core/**/*.{js,mjs,cjs,ts}'],
+    files: ['src/**/*.{js,mjs,cjs,ts}'],
     languageOptions: {
       globals: globals.node,
       parser: tseslint.parser,
